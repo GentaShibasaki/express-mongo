@@ -1,15 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const postDocuments = require("../controllers/postDocuments");
+const getDocuments = require("../controllers/getDocuments");
 
-router.post("/upload", (req, res) => {
-  res.status(200).send({ message: "This URL path is for uploading documents" });
-});
+router.post("/upload", postDocuments);
 
-router.get("/", (req, res) => {
-  res.status(200).send({
-    message:
-      "This URL path is for getting up to three documetns with query string",
-  });
-});
+router.get("/", getDocuments);
 
 module.exports = router;

@@ -1,6 +1,7 @@
+// Import .env settings
+require("dotenv").config();
 const express = require("express");
 const router = require("./routes/index");
-const port = 3000;
 const app = express();
 
 // Use router settings in routes folder
@@ -14,8 +15,8 @@ app.get("*", (req, res) => {
 });
 
 // Start server listening at 3000
-const server = app.listen(port, () => {
-  console.log(`API server listening at http://localhost:${port}`);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`API server listening at http://localhost:${process.env.PORT}`);
 });
 
 // Export server for testing
