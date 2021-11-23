@@ -3,6 +3,7 @@ const chaiHttp = require("chai-http");
 const server = require("../../../app");
 const path = require("path");
 const fs = require("fs");
+const { doesNotMatch } = require("assert");
 
 // Configure chai settings
 chai.use(chaiHttp);
@@ -16,7 +17,6 @@ describe("GET test", () => {
 
   describe("GET test", () => {
     it("Should return 200 when there are documents in mongodb and no keyword specified", async () => {
-      // Need to upload file in advance
       await request
         .post("/documents/upload")
         .field("Content-Type", "multipart/form-data")
@@ -27,7 +27,8 @@ describe("GET test", () => {
           ),
           "test-for-search-xxx.pdf"
         );
-      const res = await request.get("/documents");
+      const secondRequest = chai.request(server);
+      const res = await secondRequest.get("/documents");
       res.should.have.status(200);
       res.should.be.json;
     });

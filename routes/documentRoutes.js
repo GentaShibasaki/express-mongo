@@ -13,7 +13,6 @@ router.post("/upload", (req, res) => {
         `The following error happened at postDocuments controller: ${err}`
       );
     }
-    console.log("Finished postDocuments controller");
   });
 });
 
@@ -24,7 +23,6 @@ router.get("/", (req, res) => {
         `The following error happened at getDocuments controller: ${err}`
       );
     }
-    console.log("Finished getDocuments controller");
   });
 });
 

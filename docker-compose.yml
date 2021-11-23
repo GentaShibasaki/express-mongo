@@ -1,0 +1,31 @@
+version: "3"
+services:
+  server:
+    build: ./
+    container_name: "server"
+    command: node app.js
+    ports:
+      - ${PORT}:${PORT}
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/server
+    networks:
+      - default
+  mongo:
+    image: mongo:5.0.3
+    container_name: "mongo"
+    command:
+      - mongod
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - default
+
+volumes:
+  mongo-data:
