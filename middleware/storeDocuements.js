@@ -8,14 +8,17 @@ const storage = new GridFsStorage({
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: (req, file) => {
     const date = new Date();
+    const filename = file.originalname.split(".")[0];
+    const fileExtention = file.originalname.split(".")[1];
 
     return {
       bucketName: process.env.MONGODB_IMAGE_BUCKET_NAME,
-      filename: `${dateFormat()}${file.originalname}`,
+      filename: `${filename}_${dateFormat()}.${fileExtention}`,
       metadata: {
         // Since mongodb's default timezone is UTC, need to add metadata to save actual timezone and update date
         timeZone: process.env.TZ,
-        uoloadDate: date.toString(),
+        uploadDate: date.toString(),
+        originalFilename: file.originalname,
       },
     };
   },

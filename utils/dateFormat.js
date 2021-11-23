@@ -9,10 +9,11 @@ const dateFormat = () => {
   ];
 
   let formattedDate = "";
-  getDateMethods.forEach((method) =>
+  const methodsLength = getDateMethods.length;
+  getDateMethods.forEach((method, i) =>
     method < 10
       ? (formattedDate += "0" + method + "-")
-      : (formattedDate += method + "-")
+      : (formattedDate += method + (methodsLength === i + 1 ? "" : "-"))
   );
   return formattedDate;
 };
