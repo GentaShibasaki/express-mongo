@@ -1,6 +1,8 @@
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const server = require("../../../app");
+const path = require("path");
+const fs = require("fs");
 
 // Configure chai settings
 chai.use(chaiHttp);
@@ -12,16 +14,38 @@ describe("GET test", () => {
     request = chai.request(server);
   });
 
-  describe("GET /documents", () => {
-    // Test to GET end point, for now we will get simple response
-    it("should get json response for now", async () => {
+  describe("GET test", () => {
+    it("Should return 200 when there are documents in mongodb and no keyword specified", async () => {
+      // Need to upload file in advance
+      await request
+        .post("/documents/upload")
+        .field("Content-Type", "multipart/form-data")
+        .attach(
+          "documents",
+          fs.readFileSync(
+            path.join(__dirname, "../../assets/" + "test-file.pdf")
+          ),
+          "test-for-search-xxx.pdf"
+        );
       const res = await request.get("/documents");
       res.should.have.status(200);
       res.should.be.json;
+    });
+
+    it("Should return 400 and an error message when user put keyword that is not included in documents' name", async () => {
+      const res = await request.get("/documents?keyword=zzz");
+      res.should.have.status(500);
+      res.should.be.json;
       JSON.parse(res.text).should.deep.equal({
         message:
-          "This URL path is for getting up to three documetns with query string",
+          "No documents found! Please change your keyword if you set or upload documents in advance",
       });
+    });
+
+    it("Should return 200 when there are documents in mongodb and keyword is included in documents' name", async () => {
+      const res = await request.get("/documents?keyword=xxx"); // Use the file uploaded in previous test
+      res.should.have.status(200);
+      res.should.be.json;
     });
   });
 });

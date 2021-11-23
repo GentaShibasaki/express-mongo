@@ -30,7 +30,8 @@ const getDocuments = async (req, res) => {
 
     if ((await cursor.count()) === 0) {
       return res.status(500).send({
-        message: "No documents found!",
+        message:
+          "No documents found! Please change your keyword if you set or upload documents in advance",
       });
     }
 
