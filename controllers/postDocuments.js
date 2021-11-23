@@ -28,6 +28,13 @@ const postDocuments = async (req, res) => {
         message: "You must select a pdf file less than 20MB.",
       });
 
+    //If users set documents in unexpected field, send an error message
+    if (error.code === "LIMIT_UNEXPECTED_FILE") {
+      res.status(400).json({
+        message: "Field name for uploading documents must be 'documents'",
+      });
+    }
+
     //Following is for when unexpected error occurred
     console.log("Following error happened :", error);
     return res.status(500).json({

@@ -11,8 +11,8 @@ const dateFormat = () => {
   let formattedDate = "";
   getDateMethods.forEach((method) =>
     method < 10
-      ? (formattedDate += "0" + method)
-      : (formattedDate += "" + method)
+      ? (formattedDate += "0" + method + "-")
+      : (formattedDate += method + "-")
   );
   return formattedDate;
 };
