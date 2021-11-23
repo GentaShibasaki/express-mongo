@@ -142,6 +142,16 @@ GridFS might be slower than file system, but file system can't add meta data and
 
 For now I don't finish everything. I have to do the follwoing remaining tasks at least.
 
+- **Add more mongodb settings**\
+  Add the following mongodb settings in docker-compsoe.yml in order to give users an access to mongodb in mongodb container.\
+  (These settings are written in .env file but I don't use them at the moment)
+
+```
+environment:
+      MONGO_INITDB_ROOT_USERNAME:your_username
+      MONGO_INITDB_ROOT_PASSWORD:your_password
+```
+
 - **Create more tests**\
   Need do edge cases like check upload API can upload 5 files, and can upload until 19.9MB file size, etc. Also, need to do queue test.
 - **Implement queue tasks**\

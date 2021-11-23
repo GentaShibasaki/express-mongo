@@ -14,7 +14,7 @@ app.get("*", (req, res) => {
     .send({ message: "This URL path is not available as an api endpoint" });
 });
 
-// Start server listening at 3000
+// Start server listening at process.env.PORT
 const server = app.listen(process.env.PORT, () => {
   console.log(`API server listening at http://localhost:${process.env.PORT}`);
 });
