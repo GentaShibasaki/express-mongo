@@ -6,8 +6,6 @@ THis is a simple REST API server for uploading pdf documenets, and getting them.
 
 ## Install
 
----
-
 ### Start this service on your computer
 
 1. Firstly, please make sure you already installed [Node.js](https://nodejs.org/en/), `npm`, `mongodb` on your computer.
@@ -24,14 +22,11 @@ MONGODB_IMAGE_BUCKET_NAME=documents // You can put any name you want
 #server settings
 PORT=8080
 TZ=Asia/Tokyo
-
 ```
 
 5. Run `npm run start` to run your server.
 
 ## Test
-
----
 
 ### Start this service using docker
 
@@ -47,14 +42,11 @@ MONGODB_IMAGE_BUCKET_NAME=documents // You can put any name you want
 #server settings
 PORT=8080
 TZ=Asia/Tokyo
-
 ```
 
 3. Run `docker-compose up -d` to create docker images and run them
 
 ## How to test Express-Mongo
-
----
 
 ### Test it on your computer
 
@@ -69,8 +61,6 @@ After you finish setting it up on docker, just run `docker-compose run --rm serv
 This service has only the following two endpints.
 
 ## POST /documents/upload
-
----
 
 ### Description
 
@@ -97,8 +87,6 @@ curl --location --request POST 'localhost:8080/documents/upload' \
 
 ## GET /documents?keyword=
 
----
-
 ### Description
 
 This endponit is for getting up to three pdf documents matched with the keyword from gridfs in mongodb. If you don't set keyword, this endpoint will get latest three pdf documents from gridfs.
@@ -115,13 +103,9 @@ curl --location --request GET 'localhost:3000/documents?keyword=yourkeyword'
 
 ## System architecture diagram
 
----
-
 ![System architecture diagram](/assets/system_architecture.svg)
 
 ## Main technologies
-
----
 
 ### Express
 
@@ -137,8 +121,6 @@ GridFS might be slower than file system, but file system can't add meta data and
 # Remaining tasks/Improvements, etc
 
 ## Reamining tasks
-
----
 
 For now I don't finish everything. I have to do the follwoing remaining tasks at least.
 
@@ -158,8 +140,6 @@ environment:
   Set a time out and if server can't deal with multiple API calls within the time out, remove queued task from queue and make a response which tells users like "Server is busy right now. Please wait a moment and try your request again"
 
 ## Improvements
-
----
 
 - **Create authentication process**\
   For now, once server is up, users can call APIs. But in the future if this server save/get senstive information such as user information, need to create authentication process like Oauth2.\
